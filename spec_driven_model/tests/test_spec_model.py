@@ -8,6 +8,15 @@ from unittest.mock import patch
 
 from odoo.tools import mute_logger
 
+# [HMO-COMPAT] Patch de compatibilidade com Odoo 19.0
+# MetaModel.module_to_models foi renomeado para MetaModel._module_to_models__ no Odoo 19.0
+try:
+    from odoo import models as _odoo_models
+    if not hasattr(_odoo_models.MetaModel, 'module_to_models'):
+        _odoo_models.MetaModel.module_to_models = _odoo_models.MetaModel._module_to_models__
+except Exception:
+    pass
+
 from odoo_test_helper import FakeModelLoader
 
 from odoo.models import NewId
