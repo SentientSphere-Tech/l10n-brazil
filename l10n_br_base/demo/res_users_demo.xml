@@ -39,6 +39,8 @@
         <field name="tz">America/Sao_Paulo</field>
         <field name="email">presumido@example.com</field>
     </record>
+    <!-- [HMO-COMPAT] Odoo 19.0: campo groups_id removido de res.users -->
+    <!-- Grupos são gerenciados via interface ou implied_ids no Odoo 19.0 -->
     <record id="user_demo_simples" model="res.users">
         <field name="partner_id" ref="partner_demo_simples" />
         <field name="login">simples</field>
@@ -51,11 +53,6 @@
         <field
             name="company_ids"
             eval="[Command.link(ref('l10n_br_base.empresa_simples_nacional'))]"
-        />
-        <!-- [HMO-COMPAT] Sintaxe (6,0,[...]) removida no Odoo 19.0, usar Command.set -->
-        <field
-            name="groups_id"
-            eval="[Command.set([ref('base.group_user'), ref('base.group_partner_manager')])]"
         />
     </record>
     <record id="user_demo_presumido" model="res.users">
@@ -70,11 +67,6 @@
         <field
             name="company_ids"
             eval="[Command.link(ref('l10n_br_base.empresa_lucro_presumido'))]"
-        />
-        <!-- [HMO-COMPAT] Sintaxe (6,0,[...]) removida no Odoo 19.0, usar Command.set -->
-        <field
-            name="groups_id"
-            eval="[Command.set([ref('base.group_user'), ref('base.group_partner_manager')])]"
         />
     </record>
 </odoo>
