@@ -100,7 +100,7 @@ class Operation(models.Model):
         )
 
     def action_create_new(self):
-        ctx = self._context.copy()
+        ctx = dict(self.env.context)
         model = "l10n_br_fiscal.document"
         if self.fiscal_operation_type == "out":
             ctx.update(
@@ -140,7 +140,7 @@ class Operation(models.Model):
         }
         fiscal_operation_type = _fiscal_type_map[self.fiscal_type]
 
-        action_name = self._context.get("action_name", False)
+        action_name = self.env.context.get("action_name", False)
 
         if not action_name:
             action_name = (
@@ -149,7 +149,7 @@ class Operation(models.Model):
                 else "document_in_action"
             )
 
-        ctx = self._context.copy()
+        ctx = dict(self.env.context)
         ctx.pop("group_by", None)
         ctx.update(
             {
@@ -160,7 +160,7 @@ class Operation(models.Model):
         xmlid = f"l10n_br_fiscal.{action_name}"
         [action] = self.env.ref(xmlid).read()
         action["context"] = ctx
-        action["domain"] = self._context.get("use_domain", [])
+        action["domain"] = self.env.context.get("use_domain", [])
         action["domain"] += [
             ("fiscal_operation_id.fiscal_type", "=", self.fiscal_type),
             ("fiscal_operation_id", "=", self.id),

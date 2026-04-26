@@ -51,9 +51,9 @@ class SpecMixin(models.AbstractModel):
         """
         Get spec_schema and spec_version from context or from class module
         """
-        if self._context.get("spec_schema") and self._context.get("spec_version"):
-            spec_schema = self._context.get("spec_schema")
-            spec_version = self._context.get("spec_version")
+        if self.env.context.get("spec_schema") and self.env.context.get("spec_version"):
+            spec_schema = self.env.context.get("spec_schema")
+            spec_version = self.env.context.get("spec_version")
             if spec_schema and spec_version:
                 spec_version = spec_version.replace(".", "")[:2]
                 if split:

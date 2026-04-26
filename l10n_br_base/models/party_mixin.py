@@ -78,7 +78,7 @@ class PartyMixin(models.AbstractModel):
         """in the case of a simple search with only OR terms and a vat ilike condition,
         inject the possibility to match the cnpj_cpf_stripped field.
         """
-        if not any(term == "&" for term in domain) and not self._context.get(
+        if not any(term == "&" for term in domain) and not self.env.context.get(
             "no_stripped_match"
         ):
             for term in domain:

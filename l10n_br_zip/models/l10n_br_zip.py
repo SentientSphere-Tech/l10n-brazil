@@ -239,8 +239,8 @@ class L10nBrZip(models.Model):
 
     def zip_select(self):
         self.ensure_one()
-        address_id = self._context.get("address_id")
-        object_name = self._context.get("object_name")
+        address_id = self.env.context.get("address_id")
+        object_name = self.env.context.get("object_name")
         if address_id and object_name:
             obj = self.env[object_name].browse(address_id)
             obj.write(self.set_result())
