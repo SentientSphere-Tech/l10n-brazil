@@ -6,7 +6,14 @@ import importlib
 import nfelib
 from nfelib.nfe.bindings.v4_0.leiaute_nfe_v4_00 import TnfeProc
 
-from odoo.models import NewId
+# [HMO-COMPAT] NewId movido para odoo.orm.identifiers no Odoo 19.0
+try:
+    from odoo.models import NewId
+except ImportError:
+    try:
+        from odoo.tools.misc import NewId
+    except ImportError:
+        from odoo.orm.identifiers import NewId
 from odoo.tests import TransactionCase
 
 
