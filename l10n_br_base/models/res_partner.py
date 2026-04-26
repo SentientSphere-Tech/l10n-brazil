@@ -55,7 +55,7 @@ class Partner(models.Model):
         help="Is it a Brazilian partner?",
     )
 
-    @api.returns("self", lambda value: value.id)
+    # [HMO-COMPAT] @api.returns removido no Odoo 17.0+
     def copy(self, default=None):
         if self.is_br_partner:
             if default is None:
