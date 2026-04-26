@@ -13,7 +13,7 @@
     "version": "19.0.7.3.1",
     "depends": [
         "product",
-        "uom_alias",
+        "uom",
         "l10n_br_base",
     ],
     "data": [
@@ -23,7 +23,6 @@
         # Data
         "data/l10n_br_fiscal_data.xml",
         "data/uom_data.xml",
-        "data/uom.alias.csv",
         "data/product_data.xml",
         "data/l10n_br_fiscal.partner.profile.csv",
         "data/res_partner_data.xml",
