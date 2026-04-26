@@ -19,11 +19,14 @@ except Exception:
 
 from odoo_test_helper import FakeModelLoader
 
-# [HMO-COMPAT] NewId foi movido de odoo.models para odoo.tools.misc no Odoo 19.0
+# [HMO-COMPAT] NewId foi movido no Odoo 19.0 para odoo.orm.identifiers
 try:
     from odoo.models import NewId
 except ImportError:
-    from odoo.tools.misc import NewId
+    try:
+        from odoo.tools.misc import NewId
+    except ImportError:
+        from odoo.orm.identifiers import NewId
 from odoo.tests import TransactionCase
 
 _logger = logging.getLogger(__name__)
